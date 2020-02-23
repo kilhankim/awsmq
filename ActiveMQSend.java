@@ -44,7 +44,6 @@ public class ActiveMQSend
         }
  			
   
-       System.out.println(buff.toString());
     }
 
   
