@@ -2,8 +2,10 @@ import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.Message;
 import javax.jms.MessageProducer;
+import javax.jms.MessageConsumer;
 import javax.jms.Queue;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -38,25 +40,26 @@ public class MQReceive
  
     System.out.println("check 1");
     
-    Queue queue = new ActiveMQQueue(sendQueueName);
+    Queue queue = new ActiveMQQueue(receiveQueueName);
     System.out.println("check 1-2");
-    MessageProducer producer = session.createProducer(queue);
-    producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-    System.out.println("check 2");
+
+
+
     Destination destination = session.createQueue(receiveQueueName);
-    System.out.println("check 3");
-    
-    Message message = session.createTextMessage("MESSAGE 1");
-    message.setJMSReplyTo(destination);
-    producer.send(queue, message);
-    System.out.println("[SEND] " + message.toString());
-    
-    message = session.createTextMessage("MESSAGE 2");
-    message.setJMSReplyTo(destination);
-    producer.send(queue, message);
-    System.out.println("[SEND] " + message.toString());
- 	
-    
+
+    MessageConsumer consumer = session.createConsumer(destination);
+
+    // Wait for a message
+    Message message = consumer.receive(1000);
+    if (message instanceof TextMessage) {
+       TextMessage textMessage = (TextMessage) message;
+       String text = textMessage.getText();
+       System.out.println("Received text : " + text);
+    }else {
+       System.out.println("Received message : " + message);
+    }
+  
+    consumer.close();
     session.close();
     connection.close();
    }catch(Exception e)
