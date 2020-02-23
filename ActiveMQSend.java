@@ -1,6 +1,7 @@
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.Message;
+import javax.jms.TextMessage;
 import javax.jms.MessageProducer;
 import javax.jms.Queue;
 import javax.jms.Session;
@@ -36,7 +37,7 @@ public class ActiveMQSend
 	try { 
 		br = new BufferedReader(new FileReader(envFile));
 		while ((sLine = br.readLine()) != null) {
-                    buff.append(sLine);
+                    buff.append(sLine+"\r\n");
 		}
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,12 +75,17 @@ public class ActiveMQSend
     for(int i=0; i<iterationCount; i++)
     {
         //Message message = session.createTextMessage("MESSAGE jjouhiu");
-        Message message = session.createTextMessage(buff.toString());
+        //
+        //
+
+
+        System.out.println("buff.toString() : " + buff.toString());
+        TextMessage message = session.createTextMessage(buff.toString());
         message.setJMSReplyTo(destination);
         producer.send(queue, message);
         System.out.println("[SEND] " + message.toString());
 
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime);
     }
 
   /* 
@@ -102,7 +108,7 @@ public class ActiveMQSend
   {
     if(args.length !=4)
     {
-      System.out.println("Usage :  java -classpath lib/activemq-all-5.15.11.jar:. ActiveMQSend <queue name> <file path & name> <think time>"); 
+      System.out.println("Usage :  java -classpath lib/activemq-all-5.15.11.jar:. ActiveMQSend <queue name> <file path & name> <think time> <iteration time>" ); 
       return;
     }
     ActiveMQSend qsr = new ActiveMQSend();
