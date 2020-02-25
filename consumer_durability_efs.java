@@ -10,7 +10,7 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 
-public class MQReceive 
+public class consumer_durability_efs
 {
   
   static String receiveQueueName = null;
@@ -23,6 +23,7 @@ public class MQReceive
   {
     try{
     String url = "failover:(ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-1.mq.ap-northeast-2.amazonaws.com:61617,ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-2.mq.ap-northeast-2.amazonaws.com:61617)";
+
 
     //ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
     ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(url);
@@ -85,7 +86,7 @@ public class MQReceive
     iterationCount = Integer.parseInt(args[2].toString());
 
 
-    MQReceive qsr = new MQReceive();
+    consumer_durability_efs qsr = new consumer_durability_efs();
     qsr.receive();
   }
 } 

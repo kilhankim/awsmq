@@ -10,7 +10,7 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 
-public class MQReceive 
+public class consumer_throughput_ebs
 {
   
   static String receiveQueueName = null;
@@ -22,7 +22,8 @@ public class MQReceive
   //public void send() throws Exception
   {
     try{
-    String url = "failover:(ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-1.mq.ap-northeast-2.amazonaws.com:61617,ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-2.mq.ap-northeast-2.amazonaws.com:61617)";
+
+    String url = "ssl://b-076b5e24-406c-453b-89af-2be2ee20bd8b-1.mq.ap-northeast-2.amazonaws.com:61617";
 
     //ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
     ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(url);
@@ -66,26 +67,27 @@ public class MQReceive
     connection.close();
   
    }catch(Exception e)
-  {
+   {
       System.out.println(e.toString());
 
-  }
-  }
+   }
+ }
   
-  public static void main(String args[]) throws Exception
-  {
+ public static void main(String args[]) throws Exception
+ {
 
     if(args.length !=3)
     {
       System.out.println("Usage :  java -classpath lib/activemq-all-5.15.11.jar:. MQReceive <queue name> <think time> <iteration time>" );
       return;
     }
+
     receiveQueueName = args[0].toString();
     sleepTime = Integer.parseInt(args[1].toString());
     iterationCount = Integer.parseInt(args[2].toString());
 
 
-    MQReceive qsr = new MQReceive();
+    consumer_throughput_ebs qsr = new consumer_throughput_ebs();
     qsr.receive();
-  }
-} 
+ } 
+}
