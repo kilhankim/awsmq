@@ -23,7 +23,9 @@ public class consumer_throughput_ebs
   {
     try{
 
-    String url = "ssl://b-076b5e24-406c-453b-89af-2be2ee20bd8b-1.mq.ap-northeast-2.amazonaws.com:61617";
+    //String url = "ssl://b-076b5e24-406c-453b-89af-2be2ee20bd8b-1.mq.ap-northeast-2.amazonaws.com:61617";
+    String url = "ssl://b-8a5c6fe2-3882-43fa-9c74-cc014d435e88-1.mq.ap-northeast-2.amazonaws.com:61617";
+//ssl://b-8a5c6fe2-3882-43fa-9c74-cc014d435e88-1.mq.ap-northeast-2.amazonaws.com:61617
 
     //ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
     ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(url);

@@ -22,7 +22,7 @@ public class consumer_durability_efs
   //public void send() throws Exception
   {
     try{
-    String url = "failover:(ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-1.mq.ap-northeast-2.amazonaws.com:61617,ssl://b-a827c188-6f38-4f76-9569-03e3046023fd-2.mq.ap-northeast-2.amazonaws.com:61617)";
+    String url = "ssl://b-726b27b9-00bd-45bb-a32d-3afbe97add9c-1.mq.ap-northeast-2.amazonaws.com:61617";
 
 
     //ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
